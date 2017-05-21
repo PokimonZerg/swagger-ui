@@ -1,7 +1,7 @@
 import React, { PropTypes } from "react"
 import { fromJS } from "immutable"
 import ImPropTypes from "react-immutable-proptypes"
-
+import normalizeUrl from "normalize-url"
 
 class Path extends React.Component {
   static propTypes = {
@@ -78,6 +78,7 @@ export default class Info extends React.Component {
 
   render() {
     let { info, url, host, basePath, getComponent, externalDocs } = this.props
+	var uri = normalizeUrl(url)
     let version = info.get("version")
     let description = info.get("description")
     let title = info.get("title")
@@ -93,9 +94,9 @@ export default class Info extends React.Component {
         <hgroup className="main">
           <h2 className="title" >{ title }
             { version && <small><pre className="version"> { version } </pre></small> }
+            { host || basePath ? <Path host={ host } basePath={ basePath } /> : null }
+            { url && <a target="_blank" href={ uri }><span className="url"> { uri } </span></a> }
           </h2>
-          { host || basePath ? <Path host={ host } basePath={ basePath } /> : null }
-          { url && <a target="_blank" href={ url }><span className="url"> { url } </span></a> }
         </hgroup>
 
         <div className="description">

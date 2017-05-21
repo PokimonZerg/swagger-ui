@@ -10,6 +10,8 @@ export default function downloadUrlPlugin (toolbox) {
     download: (url)=> ({ errActions, specSelectors, specActions }) => {
       let { fetch } = fn
       url = url || specSelectors.url()
+      if (url.indexOf("/") == 0)
+        url = window.location.href + url.substring(1)
       specActions.updateLoadingStatus("loading")
       fetch({
         url,
