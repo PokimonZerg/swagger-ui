@@ -100,7 +100,7 @@ export default class Info extends React.Component {
         </hgroup>
 
         <div className="description">
-          <Markdown options={{html: true, typographer: true, linkify: true, linkTarget: "_blank"}} source={ description } />
+          <Markdown source={ description } />
         </div>
 
         {
